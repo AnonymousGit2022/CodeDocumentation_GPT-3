@@ -193,15 +193,10 @@ if __name__ == '__main__':
 
   codesearch_df = pd.read_excel(file_name+".xlsx")
 
-  #tryyyyy
-
   references = []
-  #references.append("1\tMakes sure the fast-path emits in order.")
-  
   predictions = []
 
   bleu_list = []    
-  #predictions.append("1\temits a value to an observer, either immediately or after adding it to a queue first.")
   for idx,row in codesearch_df.iterrows():
     ref_doc = ast.literal_eval(row['docstring_tokens'])
     ref_doc = ' '.join(map(str, ref_doc))
