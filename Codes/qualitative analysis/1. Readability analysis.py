@@ -4,7 +4,6 @@ import os
 import textstat
 import ast
 import statistics
-#print(type(editdistance.eval('banana','bahama')))
 
 #Flesch-Kincaid Grade Readability for a list of texts
 def readability_measure_FleschKincaid(texts):
@@ -47,11 +46,10 @@ all_lang_generated_doc_df['GPT-3 documentation'] =  all_lang_generated_doc_df['G
 all_generated_documentation_list = all_lang_generated_doc_df['GPT-3 documentation'].tolist()
 
 
-#print(all_actual_documentation_list)
 
 #Quality of Generated Docs
 # Reference Paper: 1. How Documentation Evolves Over Time by Schreck et al.
-#				   2. Automatic quality assessment of source code comments: the JavadocMiner by Khamis et al.
+#		   2. Automatic quality assessment of source code comments: the JavadocMiner by Khamis et al.
 
 
 print("Readability Analysis:")
@@ -71,6 +69,3 @@ print(avg_len(all_actual_documentation_list))
 
 print("Mean Length of Generated Documentations:")
 print(avg_len(all_generated_documentation_list))
-
-
-
