@@ -3,7 +3,6 @@ from math import ceil
 import os
 import ast
 import statistics
-#print(type(editdistance.eval('banana','bahama')))
 
 def join_doc_tokens(text):
 	ref_doc = ast.literal_eval(text)
@@ -32,22 +31,15 @@ all_generated_documentation_list = all_lang_generated_doc_df['GPT-3 documentatio
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
 
-# set of documents
-#train = ['The sky is blue.','The sun is bright.']
-#test = ['The sun in the sky is bright', 'We can see the shining sun, the bright sun.', 'I am a good boy.']
 
 # instantiate the vectorizer object
 tfidfvectorizer = TfidfVectorizer(analyzer='word',stop_words= 'english')
 
 # convert th documents into a matrix
-#total = all_actual_documentation_list + all_generated_documentation_list
 total = all_actual_documentation_list
-#print(total)
 tfidfvectorizer.fit(total)
 
 tfidf_tokens = tfidfvectorizer.get_feature_names()
-
-
 
 
 tfidf_wm_train = tfidfvectorizer.transform(all_actual_documentation_list)
@@ -55,8 +47,6 @@ tfidf_wm_train = tfidfvectorizer.transform(all_actual_documentation_list)
 tfidf_wm_test = tfidfvectorizer.transform(all_generated_documentation_list)
 
 #retrieve the terms found in the corpora
-# if we take same parameters on both Classes(CountVectorizer and TfidfVectorizer) , it will give same output of get_feature_names() methods)
-#count_tokens = tfidfvectorizer.get_feature_names() # no difference
 
 df_tfidfvect_train = pd.DataFrame(data = tfidf_wm_train.toarray(),columns = tfidf_tokens)
 print("\nTD-IDF Vectorizer Actual:\n")
@@ -69,8 +59,6 @@ print(df_tfidfvect_train)
 
 
 #retrieve the terms found in the corpora
-# if we take same parameters on both Classes(CountVectorizer and TfidfVectorizer) , it will give same output of get_feature_names() methods)
-#count_tokens = tfidfvectorizer.get_feature_names() # no difference
 df_tfidfvect_test = pd.DataFrame(data = tfidf_wm_test.toarray(),columns = tfidf_tokens)
 print("\nTD-IDF Vectorizer Generated:\n")
 
@@ -81,13 +69,9 @@ df_tfidfvect_test = df_tfidfvect_test[['Documentation','total_tf_idf']]
 print(df_tfidfvect_test)
 
 
-
 ## Calculation avg tf-idf of actual and generated doc
-
-
 print("Avg TF-IDF of Actual Documentations:")
 print(statistics.mean(df_tfidfvect_train['total_tf_idf'].tolist()))
-
 
 print("Avg TF-IDF of Generated Documentations:")
 print(statistics.mean(df_tfidfvect_test['total_tf_idf'].tolist()))
